@@ -1,6 +1,7 @@
-package com.example.deckofcards
+package com.example.deckofcards.di
 
 import com.example.deckofcards.data.apis.DeckApi
+import com.example.deckofcards.data.repositories.DeckRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,14 +18,8 @@ object DeckModule {
 
     @Singleton
     @Provides
-    fun provideDeckApiService(okHttpClient: OkHttpClient): DeckApiService {
-        return DeckApiService(okHttpClient)
-    }
-
-    @Singleton
-    @Provides
-    fun provideDeckRepository(apiService: DeckApiService): DeckRepository {
-        return DeckRepository(apiService)
+    fun provideDeckRepository(api: DeckApi): DeckRepository {
+        return DeckRepository(api)
     }
 
     @Singleton

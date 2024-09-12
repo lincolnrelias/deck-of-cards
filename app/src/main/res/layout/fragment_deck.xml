@@ -32,8 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:text="A próxima carta será... "
-                android:textSize="18sp"
+                android:text="palpite sobre a próxima carta: "
+                android:textSize="16sp"
                 android:layout_marginTop="16dp"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal" />
@@ -44,6 +44,7 @@
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:layout_marginTop="16dp"
+                android:text="Maior!"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal" />
         </LinearLayout>

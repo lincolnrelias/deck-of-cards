@@ -1,7 +1,8 @@
-package com.example.deckofcards
+package com.example.deckofcards.domain.viewmodels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.deckofcards.data.repositories.DeckRepository
 import com.example.deckofcards.data.models.Card
 import com.example.deckofcards.data.models.DeckResponse
 import com.example.deckofcards.data.models.DrawCardResponse
@@ -14,9 +15,6 @@ import javax.inject.Inject
 class DeckViewModel @Inject constructor(
         private val deckRepository: DeckRepository
 ) : ViewModel() {
-    private var score = 0
-    private var currentCard: Card? = null
-    private var lastCard: Card? = null
 
     //Livedata
     private val _deckResponse = MutableLiveData<Result<Response<DeckResponse>>?>()
@@ -30,13 +28,6 @@ class DeckViewModel @Inject constructor(
 
     private val _pileResponse = MutableLiveData<Result<Response<PileResponse>>?>()
     val pileResponse: MutableLiveData<Result<Response<PileResponse>>?> = _pileResponse
-
-    // LiveData to expose score and card changes to the fragment
-    private val _scoreLiveData = MutableLiveData<Int>()
-    val scoreLiveData: MutableLiveData<Int> get() = _scoreLiveData
-
-    private val _cardLiveData = MutableLiveData<Card>()
-    val cardLiveData: MutableLiveData<Card> get() = _cardLiveData
 
     fun createNewDeck() {
         deckRepository.createNewDeck { result ->
@@ -67,31 +58,5 @@ class DeckViewModel @Inject constructor(
             _pileResponse.postValue(result)
         }
     }
-//    fun handleCardDrawn(newCard: Card, guess: Int) {
-//        lastCard?.let {
-//            val scoreChange = calculateScore(it, newCard, guess)
-//            score += scoreChange
-//            _scoreLiveData.value = score
-//        }
-//        lastCard = currentCard
-//        currentCard = newCard
-//        _cardLiveData.value = newCard
-//        checkGameEnd()
-//    }
-//
-//    private fun checkGameEnd() {
-//        if (remainingCards == 0) {
-//            _endGameLiveData.value = true
-//        }
-//    }
-//    private fun calculateScore(oldCard: Card, newCard: Card, guess: Int): Int {
-//        val diff = newCard.compareTo(oldCard)
-//        return when {
-//            diff > 0 && guess == 1 -> 100
-//            diff == 0 && guess == 0 -> 400
-//            diff < 0 && guess == -1 -> 100
-//            else -> 0
-//        }
-//    }
 
 }

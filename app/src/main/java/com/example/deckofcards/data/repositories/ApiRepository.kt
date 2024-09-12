@@ -1,4 +1,4 @@
-package com.example.deckofcards
+package com.example.deckofcards.data.repositories
 
 import retrofit2.Call
 import retrofit2.Callback

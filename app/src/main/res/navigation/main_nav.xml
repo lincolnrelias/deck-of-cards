@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/deckFragment"
-        android:name="com.example.deckofcards.DeckFragment"
+        android:name="com.example.deckofcards.presentation.fragments.DeckFragment"
         android:label="DeckFragment" />
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.deckofcards
+package com.example.deckofcards.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.deckofcards.R
 import com.example.deckofcards.data.models.Card
 
 class DiscardedCardsAdapter(private val discardedCards: MutableList<Card>) :
