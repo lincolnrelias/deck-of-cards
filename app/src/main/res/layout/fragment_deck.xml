@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <!-- Add data binding variables here if needed -->
@@ -9,42 +10,153 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:gravity="center_horizontal">
 
+        <!-- Display Score -->
         <TextView
-            android:id="@+id/deckIdTextView"
+            android:id="@+id/scoreTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Deck ID: " />
-
-        <Button
-            android:id="@+id/createDeckButton"
+            android:text="Score: 0"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal" />
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create Deck" />
-
-        <Button
-            android:id="@+id/drawCardsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Draw Cards" />
-
-        <TextView
-            android:id="@+id/cardsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cards will be displayed here" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-
-            <ImageView
-                android:id="@+id/cardImageView"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:scaleType="fitCenter"/>
+                android:textColor="@color/white"
+                android:text="A próxima carta será... "
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal" />
+            <TextView
+                android:id="@+id/tv_next_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_marginTop="16dp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
 
-        </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="24dp"
+        android:gravity="center">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_less"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/less"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginEnd="16dp"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_equal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/equas"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginEnd="16dp"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/more"
+            android:background="?attr/selectableItemBackground"
+            android:layout_marginEnd="16dp"/>
+    </LinearLayout>
+
+    <!-- Card Image -->
+        <ImageView
+            android:id="@+id/cardImageView"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:visibility="invisible"
+            android:scaleType="fitCenter"
+            android:contentDescription="Current Card" />
+
+        <!-- Button Row for Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="24dp"
+            android:gravity="center">
+
+            <!-- Draw Card Button -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/drawCardsButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/draw"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="Draw Card"
+                android:layout_marginEnd="16dp"/>
+
+            <!-- Shuffle Deck Button -->
+            <FrameLayout
+                android:id="@+id/fl_shuffle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false">
+
+                <!-- Flat Card Image -->
+                <ImageView
+                    android:id="@+id/flatCardImage"
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/card_back" />
+
+                <!-- Shuffle Button (Icon on top of the card) -->
+                <ImageView
+                    android:id="@+id/shuffleButton"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/shuffle"
+                    android:elevation="10dp"
+                    android:contentDescription="Shuffle Deck"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
+
+
+            </FrameLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/restart"
+                android:background="?attr/selectableItemBackground"
+               />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/discardedCardsRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="25dp"
+                android:padding="25dp"
+                app:spanCount="7"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                android:clipChildren="false"
+                android:clipToPadding="false"/>
+        </LinearLayout>
     </LinearLayout>
 </layout>
